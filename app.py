@@ -10,7 +10,11 @@ API_KEY = "ua1Kq6fujHNfW05dNDg5nRE7NBs1ZgEKOUv5YSpFGj2jkO2KTt"
 # Load folktales from CSV
 @st.cache_data
 def load_folktales():
-    return pd.read_csv("folktales.csv")
+    try:
+        return pd.read_csv("folktales.csv", encoding="utf-8", quotechar='"')  # Ensure quotes handle commas
+    except Exception as e:
+        st.error(f"Error loading folktales: {e}")
+        return pd.DataFrame(columns=["title", "origin", "story"])  # Return empty DataFrame on failure
 
 # Function to translate text
 def translate_text(text, source_lang, target_lang):
