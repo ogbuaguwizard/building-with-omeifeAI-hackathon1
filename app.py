@@ -4,7 +4,7 @@ import requests
 # Omeife AI API Endpoints
 TRANSLATION_API_URL = "https://apis.omeife.ai/api/v1/user/developer/translate"
 SPEECH_SYNTHESIS_API_URL = "https://apis.omeife.ai/api/v1/user/translation/speech/query"
-API_KEY = "your_api_key_here"  # Replace with your actual API key
+API_KEY = "ua1Kq6fujHNfW05dNDg5nRE7NBs1ZgEKOUv5YSpFGj2jkO2KTt"
 
 # Sample folktales in different languages
 folktales = {
