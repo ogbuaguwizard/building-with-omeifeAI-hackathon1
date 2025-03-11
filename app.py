@@ -19,9 +19,17 @@ def load_folktales():
 # Function to translate text
 def translate_text(text, source_lang, target_lang):
     payload = {"text": text, "from": source_lang, "to": target_lang}
-    headers = {"Authorization": f"Bearer {API_KEY}", "Accept": "application/json", "Content-Type": "application/json"}
+    headers = {
+        "Authorization": f"Bearer {API_KEY}",
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+    }
     response = requests.post(TRANSLATION_API_URL, json=payload, headers=headers)
-    return response.json().get("translated_text", "Translation failed.") if response.status_code == 200 else "Translation service unavailable."
+    print("Response:", response.status_code, response.text)  # Print API response for debugging
+    if response.status_code == 200:
+        return response.json().get("translated_text", "Translation failed.")
+    else:
+        return f"Translation failed. Error: {response.text}"
 
 # Function to generate speech
 def synthesize_speech(text):
