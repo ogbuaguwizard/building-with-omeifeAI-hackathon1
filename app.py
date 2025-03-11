@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import requests
+import json
 
 # Omeife AI API Endpoints
 TRANSLATION_API_URL = "https://apis.omeife.ai/api/v1/user/developer/translate"
@@ -18,18 +19,22 @@ def load_folktales():
 
 # Function to translate text
 def translate_text(text, source_lang, target_lang):
-    payload = {"text": text, "from": source_lang, "to": target_lang}
+    url = TRANSLATION_API_URL
+    payload = json.dumps({"text": text, "from": source_lang, "to": target_lang})
     headers = {
-        "Authorization": f"Bearer {API_KEY}",
         "Accept": "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {API_KEY}"
     }
-    response = requests.post(TRANSLATION_API_URL, json=payload, headers=headers)
-    print("Response:", response.status_code, response.text)  # Print API response for debugging
+    
+    response = requests.post(url, headers=headers, data=payload)  # Use data=payload
+    print("Response:", response.status_code, response.text)  # Debugging
+
     if response.status_code == 200:
         return response.json().get("translated_text", "Translation failed.")
     else:
         return f"Translation failed. Error: {response.text}"
+
 
 # Function to generate speech
 def synthesize_speech(text):
@@ -55,7 +60,7 @@ st.subheader(f"Story: {selected_story['title']}")
 st.write(selected_story["story"])
 
 # Translation
-target_language = st.selectbox("Translate to:", ["English", "Igbo", "Yoruba", "Hausa", "Nigerian Pidgin"])
+target_language = st.selectbox("Translate to:", ["English", "Igbo", "Yoruba", "hausa", "Nigerian Pidgin"])
 if st.button("Translate"):
     translated_story = translate_text(selected_story["story"], "English", target_language)
     st.subheader(f"Translated Story in {target_language}")
