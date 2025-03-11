@@ -53,7 +53,7 @@ st.subheader(f"Story: {selected_story['title']}")
 st.write(selected_story["story"])
 
 # Translation
-target_language = st.selectbox("Translate to:", ["English", "Igbo", "Yoruba", "hausa", "Nigerian Pidgin"])
+target_language = st.selectbox("Translate to:", ["english", "igbo", "yoruba", "hausa", "pidgin"])
 if st.button("Translate"):
     translated_story = translate_text(selected_story["story"], "English", target_language)
     st.subheader(f"Translated Story in {target_language}")
