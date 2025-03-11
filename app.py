@@ -6,7 +6,7 @@ import json
 # Omeife AI API Endpoints
 TRANSLATION_API_URL = "https://apis.omeife.ai/api/v1/user/developer/translate"
 SPEECH_SYNTHESIS_API_URL = "https://apis.omeife.ai/api/v1/user/translation/speech/query"
-API_KEY = "ua1Kq6fujHNfW05dNDg5nRE7NBs1ZgEKOUv5YSpFGj2jkO2KTt"
+API_KEY = "bmxRAdtgcwcCjF9dOmooEIFHZpwGfWG66jqLTkIO57u83Hq4io"
 
 # Load folktales from CSV
 @st.cache_data
