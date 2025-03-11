@@ -31,7 +31,7 @@ def translate_text(text, source_lang, target_lang):
     print("Response:", response.status_code, response.text)  # Debugging
 
     if response.status_code == 200:
-        return response.json().get("translated_text", "Translation failed.")
+        return response.json().get("data.translated_text", "Translation failed.")
     else:
         return f"Translation failed. Error: {response.text}"
 
